@@ -170,7 +170,7 @@ export const verifyOtp = (req, res) => {
       const dbOtp = result[0]?.otp_value;
       if (otp === dbOtp) {
         const sql =
-          "INSERT INTO users(state, district, assembly, name,email,phone,phonepe,address,voteridnumber,adharnumber,voteridurl,adharidurl, mandal,password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+          "INSERT INTO users(state, district, assembly, name,email,phone,phonepe,address,voteridnumber,adharnumber,voteridurl,adharidurl, mandal,password,role) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         connection.query(
           sql,
           [
@@ -188,6 +188,7 @@ export const verifyOtp = (req, res) => {
             adharIdImage,
             mandals,
             password,
+            req.body.role,
           ],
           (err, result) => {
             if (err) {
