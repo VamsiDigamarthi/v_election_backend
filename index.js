@@ -1,10 +1,9 @@
 import express from "express";
 import cors from "cors";
-import textflow from "textflow.js";
 import cluster from "cluster";
 import http from "http";
 import { cpus } from "os";
-
+import "dotenv/config";
 const numCPUs = cpus().length;
 
 import bodyParser from "body-parser";
@@ -48,7 +47,6 @@ if (cluster.isMaster) {
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
-
   cluster.on("exit", (worker, code, signal) => {
     console.log(`Worker ${worker.process.pid} died`);
   });
